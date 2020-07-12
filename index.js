@@ -72,9 +72,9 @@ function createWindow() {
         label: 'Info',
         click: function () {
             openAboutWindow({
-                product_name: 'Dusk Player',
-                homepage: 'https://home.aveek.io',
-                copyright: 'By Aveek Saha',
+                product_name: 'Tplayer2',
+                homepage: 'https://github.com/thoni56/MusicPlayer',
+                copyright: 'Original By Aveek Saha - Adapted for dance classes by Thomas Nilefalk',
                 icon_path: path.join(__dirname, 'build/icon.png')
             })
         }
@@ -111,9 +111,9 @@ function createWindow() {
 
                     click: function () {
                         openAboutWindow({
-                            product_name: 'Dusk Player',
-                            homepage: 'https://home.aveek.io',
-                            copyright: 'By Aveek Saha',
+                            product_name: 'Tplayer2',
+                            homepage: 'https://github.com/thoni56/MusicPlayer',
+                            copyright: 'By Aveek Saha - Adapted for dance classes by Thomas Nilefalk',
                             icon_path: path.join(__dirname, 'build/icon.png')
                         })
                     }
@@ -175,7 +175,7 @@ function openFolderDialog() {
 
                 storage.set('path', { path: filePath }, function (error) {
                     if (error) throw error
-                })                
+                })
 
                 scanDir(filePath)
             }
@@ -210,7 +210,7 @@ var walkSync = function (dir, filelist) {
 function scanDir(filePath) {
     if (!filePath || filePath[0] == 'undefined') return
     // console.log(filePath);
-    
+
     win.webContents.send('selected-files', filePath)
 }
 

@@ -1,11 +1,11 @@
 {
-  "name": "DuskPlayer",
-  "version": "5.0.0",
-  "homepage": "https://aveek-saha.github.io",
-  "description": "A music player for your desktop",
+  "name": "Tplayer2",
+  "version": "1.0.0",
+  "homepage": "https://github.com/thoni56/MusicPlayer",
+  "description": "A music player for your dance classes - forked from Aveek-Saha/MusicPlayer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Aveek-Saha/MusicPlayer.git"
+    "url": "https://github.com/thoni56/MusicPlayer.git"
   },
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "aveek-saha",
+        "owner": "thoni56",
         "repo": "MusicPlayer"
       }
     ],
@@ -47,7 +47,7 @@
         "deb"
       ],
       "category": "Utility",
-      "maintainer": "Aveek <aveek.s98@gmail.com>",
+      "maintainer": "Thomas Nilefalk <thomas@nilefalk.se>",
       "icon": "build"
     },
     "win": {
