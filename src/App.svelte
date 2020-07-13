@@ -276,6 +276,16 @@
     songPlaying = true;
   };
 
+  var showFilter = function() {
+    if (playListVisible) {
+      playListVisible = false;
+      console.log(playListVisible);
+    } else {
+      playListVisible = true;
+      console.log(playListVisible);
+    }
+  };
+
   var showPlaylist = function() {
     if (playListVisible) {
       playListVisible = false;
@@ -529,6 +539,7 @@
         <br />
         <div class="col-md-12" id="outerCtrl">
           <Settings
+            on:showFilter={showFilter}
             on:showPlaylist={showPlaylist}
             on:toggleShuffle={toggleShuffle}
             {shuffle}

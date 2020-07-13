@@ -78,7 +78,7 @@ body{
     float: right;
 }
 
-#shuffleBtn{
+#shuffleBtn, #filterBtn{
     float: right;
     margin-right:5% 
 }
