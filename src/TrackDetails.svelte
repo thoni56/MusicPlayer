@@ -18,7 +18,9 @@
     </small>
   </h3>
   <br />
-  <h3 id="bpm">{trackBPM} bpm</h3>
-  <br />
+  {#if trackBPM}
+    <h3 id="bpm">{trackBPM} bpm</h3>
+    <br />
+  {/if}
 
 </div>

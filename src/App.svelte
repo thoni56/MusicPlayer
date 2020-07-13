@@ -220,8 +220,7 @@
         else trackAlbum = "";
         var img = document.getElementById("picture");
 
-        if (bpm) trackBPM = bpm;
-        else trackBPM = "?";
+        trackBPM = bpm;
 
         if (metadata.common.picture) {
           var picture = metadata.common.picture[0];
