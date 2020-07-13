@@ -11,8 +11,8 @@
     dispatch("showPlaylist");
   }
 
-  function showFilter() {
-    dispatch("showFilter");
+  function showFilters() {
+    dispatch("showFilters");
   }
 
   function toggleShuffle() {
@@ -39,7 +39,7 @@
 <button
   type="button"
   id="filterBtn"
-  on:click={showFilter}
+  on:click={showFilters}
   class="btn btn-primary-outline btn-lg justify-content-center">
   <i class="fas fa-filter fa-lg fa-inverse" />
 </button>

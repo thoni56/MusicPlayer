@@ -40,7 +40,7 @@ body{
   margin: auto;
 }
 
-#playlist{
+#playlist, #filters {
     float: left;
     z-index: 5;
     overflow-y: auto;

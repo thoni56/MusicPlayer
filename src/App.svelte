@@ -3,6 +3,7 @@
   import TrackDetails from "./TrackDetails.svelte";
   import PLaybackControls from "./PlaybackControls.svelte";
   import Settings from "./Settings.svelte";
+  import Filters from "./Filters.svelte";
 
   const ipc = require("electron").ipcRenderer;
   const fs = require("fs");
@@ -19,6 +20,7 @@
   let songList = null;
   let songPlaying = false;
   let playListVisible = false;
+  let filtersVisible = false;
   let shuffle = false;
   let mute = false;
   let loading = false;
@@ -279,23 +281,25 @@
     songPlaying = true;
   };
 
-  var showFilter = function () {
-    if (playListVisible) {
-      playListVisible = false;
-      //console.log(playListVisible);
+  var showFilters = function () {
+    if (filtersVisible) {
+      filtersVisible = false;
     } else {
-      playListVisible = true;
-      //console.log(playListVisible);
+      if (playListVisible) {
+        playListVisible = false;
+      }
+      filtersVisible = true;
     }
   };
 
   var showPlaylist = function () {
     if (playListVisible) {
       playListVisible = false;
-      // console.log(playListVisible)
     } else {
+      if (filtersVisible) {
+        filtersVisible = false;
+      }
       playListVisible = true;
-      // console.log(playListVisible)
     }
   };
 
@@ -487,6 +491,11 @@
         {player}
         on:changeSong={(event) => playPlaylistSong(event.detail.index)} />
     {/if}
+    {#if filtersVisible}
+      <Filters
+        {player}
+        on:changeSong={(event) => playPlaylistSong(event.detail.index)} />
+    {/if}
     <div class="col-5 my-auto">
       {#if loading}
         <div
@@ -542,7 +551,7 @@
         <br />
         <div class="col-md-12" id="outerCtrl">
           <Settings
-            on:showFilter={showFilter}
+            on:showFilters={showFilters}
             on:showPlaylist={showPlaylist}
             on:toggleShuffle={toggleShuffle}
             {shuffle}
