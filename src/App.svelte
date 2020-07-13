@@ -35,10 +35,10 @@
   let slider = 100;
   let offsetWidth;
 
-  storage.has("path", function(error, hasKey) {
+  storage.has("path", function (error, hasKey) {
     if (error) throw error;
     if (hasKey) {
-      storage.get("path", function(error, data) {
+      storage.get("path", function (error, data) {
         if (error) throw error;
         scanDir([data.path.toString()]);
       });
@@ -52,7 +52,7 @@
       document.body.style.backgroundColor = "#F5F5F5";
       document.body.style.color = "#212529";
 
-      icons.forEach(icon => {
+      icons.forEach((icon) => {
         icon.style.color = "#212529";
       });
     } else if (data.theme == "dark") {
@@ -60,31 +60,31 @@
       document.body.style.backgroundColor = "#212121";
       document.body.style.color = "azure";
 
-      icons.forEach(icon => {
+      icons.forEach((icon) => {
         icon.style.color = "azure";
       });
     } else if (data.theme == "disco") {
       theme = "disco";
-      icons.forEach(icon => {
+      icons.forEach((icon) => {
         icon.style.color = "azure";
       });
     }
   }
 
-  storage.has("theme", function(error, hasKey) {
+  storage.has("theme", function (error, hasKey) {
     if (error) throw error;
     if (hasKey) {
-      storage.get("theme", function(error, data) {
+      storage.get("theme", function (error, data) {
         if (error) throw error;
         setTheme(data);
       });
     }
   });
 
-  var walkSync = function(dir, filelist) {
+  var walkSync = function (dir, filelist) {
     files = fs.readdirSync(dir);
     filelist = filelist || [];
-    files.forEach(function(file) {
+    files.forEach(function (file) {
       if (fs.statSync(path.join(dir, file)).isDirectory()) {
         filelist = walkSync(path.join(dir, file), filelist);
       } else {
@@ -115,6 +115,7 @@
       var data = {};
       var title = metadata.common.title;
       var artist = metadata.common.artist;
+      var bpm = metadata.common.bpm;
       if (title) data.title = metadata.common.title;
       else data.title = audioFile.split(path.sep).slice(-1)[0];
       if (artist) data.artist = metadata.common.artist;
@@ -145,11 +146,11 @@
     // console.log(data);
     setTheme(data);
   }
-  ipc.on("theme-change", function(event, arg) {
+  ipc.on("theme-change", function (event, arg) {
     themeChange(arg);
   });
 
-  ipc.on("selected-files", function(event, arg) {
+  ipc.on("selected-files", function (event, arg) {
     // console.log(arg);
 
     scanDir(arg);
@@ -171,14 +172,14 @@
         name: songList.names[i].title,
         artist: songList.names[i].artist,
         howl: null,
-        index: i
+        index: i,
       });
     }
 
-    storage.has("last-played", function(error, hasKey) {
+    storage.has("last-played", function (error, hasKey) {
       if (error) throw error;
       if (hasKey) {
-        storage.get("last-played", function(error, data) {
+        storage.get("last-played", function (error, data) {
           if (error) throw error;
           var index = arg.files.indexOf(data.path);
 
@@ -204,7 +205,7 @@
     var titles = [];
     const metadata = mm
       .parseFile(audioFile, { skipCovers: false })
-      .then(metadata => {
+      .then((metadata) => {
         // console.log(metadata.common);
         var title = metadata.common.title;
         var artist = metadata.common.artist;
@@ -228,7 +229,7 @@
           img.src = `data:${picture.format};base64,${picture.data.toString(
             "base64"
           )}`;
-          img.addEventListener("load", function() {
+          img.addEventListener("load", function () {
             if (theme == "disco") {
               var vibrant = new Vibrant(img, 128, 3);
               var swatches = vibrant.swatches();
@@ -246,20 +247,20 @@
           img.style.display = "none";
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err.message);
       });
 
     return titles;
   }
 
-  var seekToTime = function(event) {
+  var seekToTime = function (event) {
     player.seek(event.offsetX / offsetWidth);
   };
-  var playPlaylistSong = function(index) {
+  var playPlaylistSong = function (index) {
     player.skipTo(index);
   };
-  var nextSong = function() {
+  var nextSong = function () {
     if (shuffle) {
       player.skip("random-next");
     } else {
@@ -267,7 +268,7 @@
     }
     songPlaying = true;
   };
-  var prevSong = function() {
+  var prevSong = function () {
     if (shuffle) {
       player.skip("random-prev");
     } else {
@@ -276,7 +277,7 @@
     songPlaying = true;
   };
 
-  var showFilter = function() {
+  var showFilter = function () {
     if (playListVisible) {
       playListVisible = false;
       console.log(playListVisible);
@@ -286,7 +287,7 @@
     }
   };
 
-  var showPlaylist = function() {
+  var showPlaylist = function () {
     if (playListVisible) {
       playListVisible = false;
       // console.log(playListVisible)
@@ -296,7 +297,7 @@
     }
   };
 
-  var playMusic = function() {
+  var playMusic = function () {
     if (songPlaying) {
       player.pause();
       songPlaying = false;
@@ -306,7 +307,7 @@
     }
   };
 
-  var toggleShuffle = function() {
+  var toggleShuffle = function () {
     if (shuffle) {
       shuffle = false;
     } else {
@@ -314,7 +315,7 @@
     }
   };
 
-  var togglecheckbox = function() {
+  var togglecheckbox = function () {
     if (mute) {
       mute = false;
       player.volume(slider / 100);
@@ -333,7 +334,7 @@
     return array;
   }
 
-  var Player = function(playlist, index) {
+  var Player = function (playlist, index) {
     this.playlist = playlist;
     this.index = index;
     this.randomIndex = index;
@@ -343,7 +344,7 @@
   };
 
   Player.prototype = {
-    play: function(index) {
+    play: function (index) {
       var self = this;
       var sound;
 
@@ -356,21 +357,21 @@
         sound = data.howl = new Howl({
           src: [data.file],
           html5: true,
-          onplay: function() {
+          onplay: function () {
             duration = self.formatTime(Math.round(sound.duration()));
             requestAnimationFrame(self.step.bind(self));
           },
-          onend: function() {
+          onend: function () {
             if (shuffle) {
               self.skip("random");
             } else {
               self.skip("right");
             }
-          }
+          },
         });
       }
 
-      storage.set("last-played", { path: data.file }, function(error) {
+      storage.set("last-played", { path: data.file }, function (error) {
         if (error) throw error;
       });
       sound.play();
@@ -379,7 +380,7 @@
       self.index = index;
     },
 
-    pause: function() {
+    pause: function () {
       var self = this;
 
       var sound = self.playlist[self.index].howl;
@@ -387,7 +388,7 @@
       sound.pause();
     },
 
-    skip: function(direction) {
+    skip: function (direction) {
       var self = this;
 
       var index = 0;
@@ -421,7 +422,7 @@
       self.skipTo(index);
     },
 
-    skipTo: function(index) {
+    skipTo: function (index) {
       var self = this;
 
       if (self.playlist[self.index].howl) {
@@ -435,7 +436,7 @@
       } else self.play(index);
     },
 
-    step: function() {
+    step: function () {
       var self = this;
 
       var sound = self.playlist[self.index].howl;
@@ -448,17 +449,17 @@
         requestAnimationFrame(self.step.bind(self));
       }
     },
-    formatTime: function(secs) {
+    formatTime: function (secs) {
       var minutes = Math.floor(secs / 60) || 0;
       var seconds = secs - minutes * 60 || 0;
 
       return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
     },
-    volume: function(val) {
+    volume: function (val) {
       var self = this;
       Howler.volume(val);
     },
-    seek: function(time) {
+    seek: function (time) {
       var self = this;
 
       var sound = self.playlist[self.index].howl;
@@ -467,7 +468,7 @@
         sound.seek(sound.duration() * time);
         requestAnimationFrame(self.step.bind(self));
       }
-    }
+    },
   };
 
   $: if (player) {
@@ -482,7 +483,7 @@
     {#if playListVisible}
       <Playlist
         {player}
-        on:changeSong={event => playPlaylistSong(event.detail.index)} />
+        on:changeSong={(event) => playPlaylistSong(event.detail.index)} />
     {/if}
     <div class="col-5 my-auto">
       {#if loading}
@@ -526,7 +527,7 @@
             class="progress"
             id="seek"
             bind:clientWidth={offsetWidth}
-            on:click={e => seekToTime(e)}>
+            on:click={(e) => seekToTime(e)}>
             <div
               class="progress-bar bg-danger"
               style="transition: width .2s cubic-bezier(0.22, 0.61, 0.36, 1);"
