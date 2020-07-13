@@ -116,10 +116,12 @@
       var title = metadata.common.title;
       var artist = metadata.common.artist;
       var bpm = metadata.common.bpm;
+
       if (title) data.title = metadata.common.title;
       else data.title = audioFile.split(path.sep).slice(-1)[0];
       if (artist) data.artist = metadata.common.artist;
       else data.artist = "";
+      data.bpm = bpm;
 
       titles.push(data);
     }
@@ -131,11 +133,11 @@
   async function scanDir(filePath) {
     if (!filePath || filePath[0] == "undefined") return;
 
-    var arr = walkSync(filePath[0]);
-    var arg = {};
-    var names = await parseFiles(arr);
+    var files = walkSync(filePath[0]);
+    var names = await parseFiles(files);
 
-    arg.files = arr;
+    var arg = {};
+    arg.files = files;
     arg.path = filePath;
     arg.names = names;
 
@@ -171,6 +173,7 @@
         file: songList.files[i],
         name: songList.names[i].title,
         artist: songList.names[i].artist,
+        bpm: songList.names[i].bpm,
         howl: null,
         index: i,
       });
@@ -279,10 +282,10 @@
   var showFilter = function () {
     if (playListVisible) {
       playListVisible = false;
-      console.log(playListVisible);
+      //console.log(playListVisible);
     } else {
       playListVisible = true;
-      console.log(playListVisible);
+      //console.log(playListVisible);
     }
   };
 

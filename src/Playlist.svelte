@@ -37,7 +37,10 @@
       on:click={changeSong(song.index)}>
       <h6>
         {song.name} •
-        <small class="text-muted">{song.artist} • {song.bpm}</small>
+        <small class="text-muted">
+          {song.artist}
+          {#if song.bpm}• {song.bpm}{/if}
+        </small>
       </h6>
     </a>
   {/each}
