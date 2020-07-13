@@ -68,25 +68,17 @@ body{
     left: 0px;
 }
 
-.text-center{
+.text-center {
     margin-bottom: 5%
 }
 
 
-
-#playlistBtn{
+#muteBtn, #playlistBtn, #shuffleBtn, #filterBtn {
     float: right;
+    margin-left:5% 
 }
 
-#shuffleBtn, #filterBtn{
-    float: right;
-    margin-right:5% 
-}
-#checkboxrn{
-    float: right;
-    margin-right:5%
-}
-  .slidecontainer {
+.slidecontainer {
       /* display: inline-block; */
       float: left;
       width: 40%;

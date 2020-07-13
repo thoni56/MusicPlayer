@@ -73,7 +73,7 @@
 {#if mute}
   <button
     type="button"
-    id="checkboxrn"
+    id="muteBtn"
     on:click={togglecheckbox}
     class="btn btn-primary-outline btn-lg justify-content-end">
     <i class="fas fa-volume-off fa-lg fa-inverse" />
@@ -81,7 +81,7 @@
 {:else}
   <button
     type="button"
-    id="checkboxrn"
+    id="muteBtn"
     on:click={togglecheckbox}
     class="btn btn-primary-outline btn-lg justify-content-end">
     <i class="fas fa-volume-up fa-lg fa-inverse" />
